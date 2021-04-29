@@ -1,0 +1,37 @@
+.venue img {
+  max-width: 100%;
+}
+
+.venue {
+  padding:10px !important;
+  min-height: 280px !important;
+  max-height: 380px;
+}
+
+.venue a {
+  color: #000;
+}
+
+.venue .row {
+  margin-bottom: unset;
+}
+
+.venue .location,
+.venue .title,
+.venue .price {
+  font-weight: bold;
+  color: gray;
+  font-size: 14px;
+}
+
+.venue .title,
+.venue .price {
+  color: #000;
+}
+
+.venue:hover {
+  transform: scale(1.1);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius:8px;
+  z-index: 1000;
+}

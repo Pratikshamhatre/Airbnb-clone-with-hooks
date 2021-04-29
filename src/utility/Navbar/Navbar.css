@@ -1,0 +1,43 @@
+.nav{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.nav nav{
+    box-shadow: none;
+}
+
+.nav ul li{
+    color: white;
+    cursor: pointer;
+}
+
+
+.nav .nav-non-link{
+    padding: 0 15px;
+}
+
+.nav-non-link:hover{
+    border-bottom: 2px solid white;
+    background-color: initial;
+}
+
+.nav ul li:hover{
+    border-bottom: 2px solid white;
+    background-color: initial;    
+}
+
+
+.nav i.material-icons{
+    font-size:42px;
+}
+
+
+.nav-color{
+    background: #3a7bd5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a6073, #3a7bd5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a6073, #3a7bd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}

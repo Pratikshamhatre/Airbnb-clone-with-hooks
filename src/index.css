@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.main-header-text{
+  font-size: 30px !important;
+  line-height: 36px !important;
+  letter-spacing: normal !important;
+  color: #484848 !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  margin: 20px 0px 20px 20px!important;
+  padding: 0px !important;
+  font-weight: bold;
+}
+
+
+input{
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: normal;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  color: #484848;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  font-weight: normal;
+  background-color: transparent;
+  padding-left: 11px;
+  padding-right: 11px;
+  width: 100% !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: rgb(235, 235, 235) !important;
+  border-radius: 4px !important;
+  margin-bottom: 20px;  
+  box-sizing: border-box;
+}
