@@ -10,6 +10,8 @@ class Logout extends Component {
     logout=()=>{
         this.props.logout();
         this.props.openModal('closed','');
+        this.props.history.push(``)
+
     }
     render() {
     console.log(this.props)

@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import './Navbar.css';
@@ -8,21 +7,26 @@ import Login from '../../pages/Login/Login';
 import SignUp from '../../pages/Login/SignUp';
 import logoutAction from '../../actions/logoutAction';
 import Logout from '../../pages/Logout/Logout';
+import {useSelector,useDispatch} from 'react-redux';
 
 
-class Navbar extends Component {
+function Navbar(props) {
+console.log(props)
+    const auth=useSelector(state=>state.auth)
+    
+    console.log(auth)
+
+    const dispatch=useDispatch()
+
+    useEffect(()=>{
+
+    },[auth.token])
 
 
 
-    componentDidMount(){
-        console.log(JSON.parse(localStorage.getItem('currentUser')));
-        console.log(this.props);
-        
-    }
-  
-    render() {
+    // render() {
         let navColor = "transparent";
-        if (this.props.location.pathname !== "/") {
+        if (props.location.pathname !== "/") {
             navColor = "black"
         }
 
@@ -39,7 +43,6 @@ class Navbar extends Component {
         display:'inline-block'
     }
 
-        console.log(this.props)
         return (
             <div className="container-fluid nav">
                 <div className="row">
@@ -56,19 +59,19 @@ class Navbar extends Component {
                                 <li> <Link to="/"> Help </Link></li>
 
                                 
-                                  {  this.props.auth.token  ?
+                                  {  auth.token  ?
 
 <>
-<li>Hiii,<Link style={accountLinkStyle} to="/account"> {this.props.auth.email}</Link></li>
+<li>Hiii,<Link style={accountLinkStyle} to="/account"> {auth.email}</Link></li>
                                   
-                                  <li onClick={() => this.props.openModal('open', <Logout />)}><a>Log out</a></li>
+                                  <li onClick={() => dispatch(openModal('open', <Logout />))}><a>Log out</a></li>
                                   </>
                                     
                                     :
 
                                     <>
-                                        <li onClick={() => this.props.openModal('open', <SignUp />)}><a> Sign Up</a></li>
-                                        <li onClick={() => this.props.openModal('open', <Login />)}> <a> Log in</a></li>
+                                        <li onClick={() =>dispatch( openModal('open', <SignUp />))}><a> Sign Up</a></li>
+                                        <li onClick={() => dispatch(openModal('open', <Login />))}> <a> Log in</a></li>
                                         </>
                                     }
                                 
@@ -82,26 +85,26 @@ class Navbar extends Component {
                 </div>
             </div>
         )
-    }
+    // }
 }
 
 
-function mapStateToProps(state) {
-    return {
-        auth:state.auth 
-    }
-}
+// function mapStateToProps(state) {
+//     return {
+//         auth:state.auth 
+//     }
+// }
 
 
-function mapDispatchToProps(dispatcher) {
-    return bindActionCreators({
-        openModal: openModal,
-        logout:logoutAction
-    }, dispatcher)
-}
+// function mapDispatchToProps(dispatcher) {
+//     return bindActionCreators({
+//         openModal: openModal,
+//         logout:logoutAction
+//     }, dispatcher)
+// }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default Navbar;
 
 
 

@@ -1,5 +1,4 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, {useState} from 'react'
 import {bindActionCreators} from 'redux'
 import "./Login.css"
 import openModal from '../../actions/openModal';
@@ -7,37 +6,48 @@ import SignUp from './SignUp';
 import axios from 'axios';
 import swal from 'sweetalert';
 import regAction from '../../actions/regAction';
+import useControlledInput from '../../customHooks/useControlledInput';
+import {useDispatch} from 'react-redux';
+function Login(props) {
 
-class Login extends Component {
+    const dispatch=useDispatch();
 
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
 
-        this.state = {
-            email: '',
-            password: ''
-        }
-    }
+    //     this.state = {
+    //         email: '',
+    //         password: ''
+    //     }
+    // }
 
-
-
-    handleInputChange = (event) => {
-        console.log(event)
-        const {name, value} = event.target
-        this.setState({
-            [name]: value
-        })
-    }
+    const email=useControlledInput('');
+    const password=useControlledInput('');
 
 
-    onSubmit = async (event) => {
+
+
+
+    // handleInputChange = (event) => {
+    //     console.log(event)
+    //     const {name, value} = event.target
+    //     this.setState({
+    //         [name]: value
+    //     })
+    // }
+
+
+  const  onSubmit = async (event) => {
         event.preventDefault()
-        console.log(this.state)
         const url = `${window.apiHost}/users/login`;
-        let resp = await axios.post(url, this.state)
+        const data={
+            email:email.value,
+            password:password.value
+        }
+        let resp = await axios.post(url,data )
         console.log(resp)
 
-        this.props.regAction(resp.data)
+        dispatch(regAction(resp.data))
 
          if (resp.data.msg === "loggedIn") {
             swal({
@@ -46,7 +56,7 @@ class Login extends Component {
             });
 
           
-                this.props.openModal('closed', "");
+                props.openModal('closed', "");
 
         }
 
@@ -72,26 +82,26 @@ class Login extends Component {
     }
 
 
-    render() {
+    // render() {
         return (
             <div className="login-form">
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={onSubmit}>
                     <button className="facebook-login">Connect With Facebook</button>
                     <button className="google-login">Connect With Google</button>
                     <div className="login-or center">
                         <span>or</span>
                         <div className="or-divider"></div>
                     </div>
-                    <input type="text" name="email" onChange={this.handleInputChange} className="browser-default" placeholder="Email address" />
-                    <input type="password" name="password" onChange={this.handleInputChange} className="browser-default" placeholder="Password" />
+                    <input type="text" name="email" {...email} className="browser-default" placeholder="Email address" />
+                    <input type="password" name="password" {...password}  className="browser-default" placeholder="Password" />
                     <button className="sign-up-button" type="submit" >Login</button>
                     <div className="divider"></div>
-                    <div>Don't have an account? <span className="pointer" onClick={() => {this.props.openModal('open', <SignUp />)}}>Sign up</span></div>
+                    <div>Don't have an account? <span className="pointer" onClick={() => dispatch(openModal('open', <SignUp />))}>Sign up</span></div>
                 </form>
             </div>
         )
     }
-}
+// }
 
 
 
@@ -105,4 +115,4 @@ function mapDispatchToProps(dispatcher) {
 }
 
 
-export default connect(null, mapDispatchToProps)(Login)
+export default Login

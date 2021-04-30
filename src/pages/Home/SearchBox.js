@@ -1,67 +1,74 @@
-import React, {Component} from 'react'
+import React, {useState,useEffect} from 'react'
 import './SearchBox.css'
 import { withRouter } from 'react-router'
+import useControlledInput from '../../customHooks/useControlledInput';
 
 
-class SearchBox extends Component {
-constructor(props) {
-    super(props)
+function SearchBox(props) {
 
-    console.log(props)
-
-    this.state = {
-         where:'',
-         checkIn:'',
-         checkOut:'',
-         guests:0
-    }
-}
+    // const [where ,setWhere]=useState('');
+    // const [checkIn ,setCheckIn]=useState('');
+    // const [checkOut ,setCheckOut]=useState('');
+    // const [guests ,setGuests]=useState(1);
 
 
+    const where =useControlledInput('');
+    const checkIn =useControlledInput('');
+    const checkOut =useControlledInput('');
+    const guests =useControlledInput('');
 
-submitSearch = (event) => {
+// constructor(props) {
+//     super(props)
+
+//     console.log(props)
+
+//     this.state = {
+//          where:'',
+//          checkIn:'',
+//          checkOut:'',
+//          guests:0
+//     }
+// }
+
+
+
+const submitSearch = (event) => {
     event.preventDefault();
-    console.log(this.props);
-    this.props.history.push(`/search/${this.state.where}`)
-}
-
-handleChange =(e)=>{
-    const {name,value}=e.target;
-    console.log(e)
-    this.setState({[name]:value})
+    props.history.push(`/search/${where.value}`)
 }
 
 
 
-    render() {
+
+    // render() {
         return (
             <div className="home-search-box col m4">
                 <h1 className="main-header-text">Book unique places to stay and things to do.</h1>
                 
-                <form onSubmit={this.submitSearch} className="search-box-form">
+                <form onSubmit={submitSearch} className="search-box-form">
                     <div className="col m12">
                         <div className="form-label">Where</div>
                         <div className="input-field" id="where">
-                            <input className="browser-default" name="where" onChange={this.handleChange} placeholder="Anywhere" value={this.state.where} type="text" />
+                            <input className="browser-default" name="where" {...where} placeholder="Anywhere" type="text" />
                         </div>
                     </div>
 
                     <div className="col m6">
                         <div className="form-label">Check-In</div>
                         <div className="input-field" id="check-in">
-                            <input className="browser-default" name="checkIn" onChange={this.handleChange} value={this.state.checkIn} type="date" />
+                            <input className="browser-default" name="checkIn" {...checkIn}  type="date" />
                         </div>
                     </div>
                     <div className="col m6">
                         <div className="form-label">Check-Out</div>
                         <div className="input-field" id="check-in">
-                            <input className="browser-default" name="checkOut" onChange={this.handleChange} value={this.state.checkOut} type="date" />
+                            <input className="browser-default" name="checkOut"  {...checkOut}  type="date" />
                         </div>
                     </div>
                     <div className="col m12">
                         <div className="form-label">Guests</div>
                         <div className="input-field" id="where">
-                            <input className="browser-default" name="guests" onChange={this.handleChange} placeholder="Number of guests" value={this.state.guests} type="number" />
+                            <input className="browser-default" name="guests"  {...guests} placeholder="Number of guests"  type="number" />
                         </div>
                     </div>
                     <div className="col m12 submit-btn">
@@ -74,7 +81,7 @@ handleChange =(e)=>{
                 </form>
             </div>
         )
-    }
+    // }
 }
 
 

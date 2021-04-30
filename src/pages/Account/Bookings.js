@@ -38,7 +38,7 @@ export default function Bookings(props) {
         const dates=`${moment(booking.checkIn).format('MMM Do ,YYYY')}-${moment(booking.checkOut).format('MMM Do ,YYYY')}`
      return (  
         <tr key={i} className="booking-row">
-    <td>{booking.status==='confirmed' && props.type=='past'  ? 'Complete' : booking.status}</td>
+    <td>{booking.status==='confirmed' && props.type==='past'  ? 'Complete' : booking.status}</td>
     <td>
         <div className="booking-detail">{dates}</div>
         <div className="booking-detail">{booking.venueData.title}</div>
